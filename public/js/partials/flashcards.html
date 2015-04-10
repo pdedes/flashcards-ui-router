@@ -1,0 +1,19 @@
+<button ui-sref=".category({ category: 'All' })" ng-class="{ active: chosenCategory === 'All' }">All Categories</button>
+<button
+    ng-repeat="category in categories"
+    ui-sref=".category({ category: category })"
+    ng-class="{ active: chosenCategory === category }">
+{{ category }}
+</button>
+
+<loader ng-show="loading"></loader>
+
+<flash-card card="flashCard" ng-repeat="flashCard in flashCards | orderBy:'question'" ng-hide="loading || error"></flash-card>
+
+<div ng-show="error">
+    <h2>FAILED TO GET CARDS… try again perhaps?</h2>
+    <pre>http status code: {{error.status}}</pre>
+</div>
+
+<!-- When working with nexted routes, make sure you use a second ui-view inside of another ui-view! -->
+<div ui-view></div>
