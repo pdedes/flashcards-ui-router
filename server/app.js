@@ -14,6 +14,8 @@ app.use(express.static(publicPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// In HTML 5 mode, a page refresh would resolve a 404 Error, the fix here is to push this route to the end,
+// declare '/*' as a catch-all, and allow the front-end to handle all routing.
 app.get('/', function (req, res) {
     res.sendFile(indexHtmlPath);
 });
